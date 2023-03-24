@@ -1,6 +1,19 @@
-import {Link, useSearchParams} from 'react-router-dom';
+import {Link, useSearchParams, useNavigate} from 'react-router-dom';
 
 import './ColorNavigation.css'
+import {gql, useLazyQuery} from "@apollo/client";
+import {useEffect} from "react";
+
+const GET_RANDOM_COLOR = gql`
+  query randomColor {
+    randomColor {
+         id
+         hue
+         hex
+         group
+    }
+  }
+`;
 
 const listLink = (group, currentGroup) => {
     return (<li className="colorGroupListItem">
@@ -11,8 +24,19 @@ const listLink = (group, currentGroup) => {
 };
 
 function ColorNavigation() {
+    const [getRandomColor, { loading, error, data }] = useLazyQuery(GET_RANDOM_COLOR, {
+        fetchPolicy: 'network-only',
+        nextFetchPolicy: 'network-only',
+    });
+    const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const group = searchParams.get('group');
+    useEffect(() => {
+        if (data && data.randomColor.id) {
+            const id = data.randomColor.id;
+            navigate(`/detail?id=${id}`);
+        }
+    }, [data]);
     return (
         <div className="colorNavigation">
             <div style={{
@@ -20,7 +44,11 @@ function ColorNavigation() {
                 marginBottom: '30px',
                 textAlign: 'center'
             }}>
-                <button className="button">Random Color</button>
+                <button className="button" onClick={() => {
+                    if (!loading) {
+                        getRandomColor();
+                    }
+                }}>Random Color</button>
             </div>
             <div style={{
                 fontWeight: 'bold'

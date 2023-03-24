@@ -1,10 +1,15 @@
 import {ApolloServer} from '@apollo/server';
 import {startStandaloneServer} from '@apollo/server/standalone';
 import {MongoClient, ObjectId} from 'mongodb';
+import express from 'express';
 
 const url = '';
 const client = new MongoClient(url);
 const dbName = 'colors';
+
+function generateRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 (async () => {
     await client.connect();
@@ -25,6 +30,7 @@ const dbName = 'colors';
     type Query {
         colors: ColorsResult
         color(id: String): Color
+        randomColor: Color
     }
 `;
 
@@ -37,6 +43,18 @@ const dbName = 'colors';
                 const foundColors = await collection.find({
                     _id: new ObjectId(args.id)
                 }).toArray();
+                const [color] = foundColors;
+                return {
+                    id: color._id.toString(),
+                    hue: color.hue,
+                    hex: color.hex,
+                    group: color.group
+                }
+            },
+            randomColor: async (parent, args) => {
+                const foundCount = await collection.countDocuments();
+                const skip = generateRandomNumber(0, foundCount);
+                const foundColors = await collection.find({}).skip(skip).limit(1).toArray();
                 const [color] = foundColors;
                 return {
                     id: color._id.toString(),
@@ -87,5 +105,19 @@ const dbName = 'colors';
         resolvers,
     });
 
-    await startStandaloneServer(server);
+    await startStandaloneServer(server, {
+        listen: {
+            port: 5000
+        }
+    });
+
+    const app = express();
+
+    app.use(express.static('public'));
+
+    app.get('/', (req, res) => {
+        res.sendFile(__dirname + '/public/index.html');
+    });
+
+    app.listen(80);
 })();

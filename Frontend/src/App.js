@@ -12,7 +12,7 @@ import DetailView from './Pages/DetailView';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: 'http://localhost:5000',
   cache: new InMemoryCache(),
 });
 
