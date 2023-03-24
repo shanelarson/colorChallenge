@@ -16,7 +16,6 @@ const GET_COLOR = gql`
 function DetailView(props) {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
-    console.log(searchParams.get('id'));
     const { loading, error, data } = useQuery(GET_COLOR, {
         variables: {
             id: searchParams.get('id'),

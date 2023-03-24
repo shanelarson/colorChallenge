@@ -1,7 +1,7 @@
 import KolorWheel from 'kolorwheel'
 import { MongoClient } from 'mongodb';
 
-const url = 'mongodb+srv://workDemo:workDemo@workdemos.bsxli.mongodb.net/?retryWrites=true&w=majority';
+const url = '';
 const client = new MongoClient(url);
 const dbName = 'colors';
 

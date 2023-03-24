@@ -2,7 +2,7 @@ import {ApolloServer} from '@apollo/server';
 import {startStandaloneServer} from '@apollo/server/standalone';
 import {MongoClient, ObjectId} from 'mongodb';
 
-const url = 'mongodb+srv://workDemo:workDemo@workdemos.bsxli.mongodb.net/?retryWrites=true&w=majority';
+const url = '';
 const client = new MongoClient(url);
 const dbName = 'colors';
 
@@ -87,6 +87,5 @@ const dbName = 'colors';
         resolvers,
     });
 
-    const {url} = await startStandaloneServer(server);
-    console.log(`🚀 Server ready at ${url}`);
+    await startStandaloneServer(server);
 })();

@@ -2,6 +2,14 @@ import {Link, useSearchParams} from 'react-router-dom';
 
 import './ColorNavigation.css'
 
+const listLink = (group, currentGroup) => {
+    return (<li className="colorGroupListItem">
+        <Link to={`/list?group=${group}`} style={{
+            color: currentGroup === group ? group : 'black'
+        }}>{group.charAt(0).toUpperCase() + group.slice(1)}</Link>
+    </li>);
+};
+
 function ColorNavigation() {
     const [searchParams, setSearchParams] = useSearchParams();
     const group = searchParams.get('group');
@@ -18,46 +26,14 @@ function ColorNavigation() {
                 fontWeight: 'bold'
             }}>
                 <ul className="colorGroupList">
-                    <li className="colorGroupListItem">
-                        <Link to="/list?group=red" style={{
-                            color: group === 'red' ? 'red' : 'black'
-                        }}>Red</Link>
-                    </li>
-                    <li className="colorGroupListItem">
-                        <Link to="/list?group=orange" style={{
-                            color: group === 'orange' ? 'orange' : 'black'
-                        }}>Orange</Link>
-                    </li>
-                    <li className="colorGroupListItem">
-                        <Link to="/list?group=yellow" style={{
-                            color: group === 'yellow' ? 'yellow' : 'black'
-                        }}>Yellow</Link>
-                    </li>
-                    <li className="colorGroupListItem">
-                        <Link to="/list?group=green" style={{
-                            color: group === 'green' ? 'green' : 'black'
-                        }}>Green</Link>
-                    </li>
-                    <li className="colorGroupListItem">
-                        <Link to="/list?group=blue" style={{
-                            color: group === 'blue' ? 'blue' : 'black'
-                        }}>Blue</Link>
-                    </li>
-                    <li className="colorGroupListItem">
-                        <Link to="/list?group=purple" style={{
-                            color: group === 'purple' ? 'purple' : 'black'
-                        }}>Purple</Link>
-                    </li>
-                    <li className="colorGroupListItem">
-                        <Link to="/list?group=brown" style={{
-                            color: group === 'brown' ? 'brown' : 'black'
-                        }}>Brown</Link>
-                    </li>
-                    <li className="colorGroupListItem">
-                        <Link to="/list?group=gray" style={{
-                            color: group === 'gray' ? 'gray' : 'black'
-                        }}>Gray</Link>
-                    </li>
+                    {listLink('red', group)}
+                    {listLink('orange', group)}
+                    {listLink('yellow', group)}
+                    {listLink('green', group)}
+                    {listLink('blue', group)}
+                    {listLink('purple', group)}
+                    {listLink('brown', group)}
+                    {listLink('gray', group)}
                 </ul>
             </div>
             {group ? (
