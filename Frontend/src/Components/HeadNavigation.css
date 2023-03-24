@@ -1,0 +1,34 @@
+.logoWrap {
+    padding: 25px;
+}
+
+.logo {
+    display: block;
+}
+
+.bar {
+    display: flex;
+    height: 100px;
+    background-color: #363C3C;
+}
+
+.barSection {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+.searchWrap {
+    padding-right: 25px;
+}
+
+.searchInput {
+    display: block;
+    outline: none;
+    border-radius: 10px;
+    width: 276px;
+    height: 56px;
+    font-size: 29px;
+    padding-left: 20px;
+    padding-right: 20px;
+}

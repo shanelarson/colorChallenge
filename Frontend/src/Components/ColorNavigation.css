@@ -1,0 +1,50 @@
+.colorNavigation {
+    width: 280px;
+    padding: 20px;
+    background-color: #D6D8D8;
+    border-right: 1px solid #ADADAD;
+    overflow-y: auto;
+}
+
+.button {
+    border-radius: 5px;
+    width: 248px;
+    height: 60px;
+    background-color: #FFFFFF;
+    border: 1px solid #363C3C;
+    font-size: 24px;
+}
+
+.colorGroupList {
+    list-style-type: none;
+    padding: 0px;
+}
+
+.colorGroupListItem {
+    padding-bottom: 10px;
+}
+
+a:link {
+    color: black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+a:active {
+    color: black;
+    text-decoration: none;
+}
+
+.smallButton {
+    height: 30px;
+    font-size: 16px;
+}
